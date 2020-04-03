@@ -1,0 +1,10 @@
+- label: Contact Sites
+  items:
+    - name: Email
+      link: ./#email
+    - name: Discord
+      link: ./#discord
+    - name: Twitter
+      link: ./#twitter
+    - name: Other Platforms
+      link: ./#other-platforms
