@@ -28,7 +28,7 @@ Discord Server: [Join Here](https://discord.voltstro.dev)
 
 ### Twitter
 
-A fairly easy way to contact me, use this way as more of a last resort! I don't check my Twitter as much as my emails or my Discord server. Except there to be a bit of a delay for a reply.
+A fairly easy way to contact me, use this way as more of a last resort! I don't check my Twitter as much as my emails or my Discord server. Expect there to be a bit of a delay for a reply.
 
 Twitter: [@Voltstro](https://twitter.com/Voltstro)
 
@@ -38,10 +38,10 @@ You really should use another platform to contact me! This just acts as a list o
 
 * [YouTube](https://youtube.com/Voltstro)
 
-* [Instagram](https://www.instagram.com/creepysinstudios/)
+* [Instagram](https://www.instagram.com/voltstrostudios/)
 
 * [GitHub](https://github.com/Voltstro)
 
-* [Steam Group](https://steamcommunity.com/groups/creepysin)
+* [Steam Group](https://steamcommunity.com/groups/voltstro)
 
 * [Nexus Mods](https://www.nexusmods.com/users/34491035)
