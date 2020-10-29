@@ -16,13 +16,13 @@ Don't bother spamming me! I just ignore or don't read the message if it looks li
 
 ### Email:
 
-This is the **RECOMMEND** and **BEST** way to contact me, if you contact me via email, it is almost 100% guaranteed that I will see and read your message.
+If you wanna contact me via email.
 
 You can email me at: [me@voltstro.dev](mailto:me@voltstro.dev)
 
 ### Discord:
 
-This is the second most **RECOMMEND** way to contact me, as well others. If you need help with projects of mine, this is the **BEST** place to ask as others may be able to help you solve your issue! You can also come and chat with us!
+If you need help with projects of mine or yours, you may wanna ask in the Voltstro Discord server. I or others may be able to help you with your problem.
 
 Discord Server: [Join Here](https://discord.voltstro.dev)
 
@@ -34,7 +34,7 @@ Twitter: [@Voltstro](https://twitter.com/Voltstro)
 
 # Other platforms
 
-You really should use another platform to contact me! This just acts as a list of official ways to contact me!
+Here is a list of other platforms I am on:
 
 * [YouTube](https://youtube.com/Voltstro)
 
