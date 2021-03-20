@@ -2,7 +2,6 @@
 layout: post
 title:  "Pootis Bot is Out"
 date:   2019-12-24 22:56:00 +1000
-categories: update
 ---
 
 Hey everyone, long time no post. Anyway I am here to tell you about Pootis-Bot Version 1.0.0 is finally out! You can download it [here](https://pootis-bot.voltstro.dev/download/).

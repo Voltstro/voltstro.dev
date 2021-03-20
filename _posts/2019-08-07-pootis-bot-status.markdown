@@ -2,7 +2,6 @@
 layout: post
 title:  "Pootis-Bot Status"
 date:   2019-08-07 17:48:00 +1000
-categories: update
 ---
 
 Hello everyone it has been awhile since I have posted, but I am here to give an update on [Pootis-Bot](https://pootis-bot.voltstro.dev) and some other stuff as well.

@@ -2,7 +2,6 @@
 layout: post
 title:  "Time For a Name Change"
 date:   2020-04-03 21:30:00 +1000
-categories: update
 ---
 
 The time has finally come! The time where I finally change my name. Introducing my new name: "Voltstro"!

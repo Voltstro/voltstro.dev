@@ -2,7 +2,6 @@
 layout: post
 title:  "Creepysin Got An Update"
 date:   2019-05-17 00:32:00 +1000
-categories: update
 ---
 Welcome to the new blog system! I've always wanted my own blog so, well here it is! As well as introducing this blog system the site also so a semi-makeover.
 
