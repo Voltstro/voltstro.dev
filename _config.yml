@@ -37,3 +37,5 @@ defaults:
 # Exclude from processing.
 exclude:
   - "[year]-[month]-[day]-post-template.markdown"
+
+footer_menu: footer
