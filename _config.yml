@@ -38,6 +38,7 @@ collections:
   posts:
     output: true
     permalink: /blog/:year/:month/:day/:title
+    author: "Voltstro"
 
 # Exclude from processing.
 exclude:
