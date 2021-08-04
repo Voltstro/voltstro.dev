@@ -34,6 +34,11 @@ defaults:
       layout: post
       show_sidebar: true
 
+collections:
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title
+
 # Exclude from processing.
 exclude:
   - "[year]-[month]-[day]-post-template.markdown"
