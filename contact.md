@@ -3,7 +3,7 @@ layout: page
 title: Contact  
 subtitle: Here are some ways to contact me!
 show_sidebar: false
-menubar: contact
+menubar_toc: true
 hero_image: ../assets/images/ContactBanner.jpg
 hero_height: 380px
 ---
@@ -14,13 +14,13 @@ Here are some ways to contact me! Further down there are also some of my social 
 
 Don't bother spamming me! I just ignore or don't read the message if it looks like spam!
 
-### Email:
+### Email
 
 If you wanna contact me via email.
 
 You can email me at: [me@voltstro.dev](mailto:me@voltstro.dev)
 
-### Discord:
+### Discord
 
 If you need help with projects of mine or yours, you may wanna ask in the Voltstro Discord server. I or others may be able to help you with your problem.
 
@@ -32,9 +32,9 @@ A fairly easy way to contact me, use this way as more of a last resort! I don't 
 
 Twitter: [@Voltstro](https://twitter.com/Voltstro)
 
-# Other platforms
+### Other
 
-Here is a list of other platforms I am on:
+Here is a list of other platforms that I am on:
 
 * [YouTube](https://youtube.com/Voltstro)
 
