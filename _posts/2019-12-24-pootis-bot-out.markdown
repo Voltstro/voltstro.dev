@@ -6,7 +6,7 @@ date:   2019-12-24 22:56:00 +1000
 
 Hey everyone, long time no post. Anyway I am here to tell you about Pootis-Bot Version 1.0.0 is finally out! You can download it [here](https://pootis-bot.voltstro.dev/download/).
 
-![Pootis-Bot]({{site.baseurl}}/assets/blog/2019-12-24/pootis-bot-is-out/pootis.jpg)
+![Pootis-Bot](/assets/blog/2019/12/24/pootis-bot-is-out/pootis.jpg)
 
 What does this mean? Will Pootis still receive updates?
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "Unity Web Browser"
 date:   2021-03-21 00:05:00 +1000
-hero_image: "../../../../assets/blog/2021-03-21/unity-web-browser/Banner.jpg"
+hero_image: "/assets/blog/2021/03/21/unity-web-browser/Banner.jpg"
 hero_height: 380px
 ---
 
@@ -62,10 +62,10 @@ I am still flushing out some minor issues, so if you find an issue, please repor
 
 Here are some screenshots of it working in the editor and as a player build.
 
-![Screenshot 1]({{site.baseurl}}/assets/blog/2021-03-21/unity-web-browser/Screenshot-Editor1.png)
+![Screenshot 1](/assets/blog/2021/03/21/unity-web-browser/Screenshot-Editor1.png)
 
-![Screenshot 2]({{site.baseurl}}/assets/blog/2021-03-21/unity-web-browser/Screenshot-Editor2.png)
+![Screenshot 2](/assets/blog/2021/03/21/unity-web-browser/Screenshot-Editor2.png)
 
-![Screenshot 3]({{site.baseurl}}/assets/blog/2021-03-21/unity-web-browser/Screenshot-Editor3.png)
+![Screenshot 3](/assets/blog/2021/03/21/unity-web-browser/Screenshot-Editor3.png)
 
-![Screenshot 4]({{site.baseurl}}/assets/blog/2021-03-21/unity-web-browser/Screenshot-InPlayer.png)
+![Screenshot 4](/assets/blog/2021/03/21/unity-web-browser/Screenshot-InPlayer.png)

@@ -9,13 +9,13 @@ The site top nav bar is now blue instead of the old redish colour it was and as 
 
 Yea thats right, my [YouTube channel banner](https://www.youtube.com/channel/UCGE1RiKvxmhB1mEVzJS0MtA) art got updated as well as the icon.
 
-![Creepysin Channel Icon]({{site.baseurl}}/assets/blog/2019-05-17/creepysin-got-an-update/icon.jpg)
+![Creepysin Channel Icon](/assets/blog/2019/05/17/creepysin-got-an-update/icon.jpg)
 
 Here is what the new channel icon looks right, beautiful isn't it!
 
 There are also some other additions to the new site update such as Google tracking... now I know what a lot of you privacy-aware people are thinking of right now...
 
-![Wait. That's illegal]({{site.baseurl}}/assets/blog/2019-05-17/creepysin-got-an-update/wait_that's_illegal.jpg)
+![Wait. That's illegal](/assets/blog/2019/05/17/creepysin-got-an-update/wait_that's_illegal.jpg)
 
 Which is fair enough, you got Mark Zuckerberg here selling your data! But the tracking information is to provide me with info to improve this site and other stuff, but one thing I promise to do is never sell that data or give it away to anyone! I don't care who that person is! I also promise to never put ads on the site, ads are just a ugly mess and its not like thousands of people use ad-blockers at all. I want to keep this site an ad-free site that I will pay for with my spare pocket money.
 

@@ -6,7 +6,7 @@ date:   2019-08-07 17:48:00 +1000
 
 Hello everyone it has been awhile since I have posted, but I am here to give an update on [Pootis-Bot](https://pootis-bot.voltstro.dev) and some other stuff as well.
 
-![Pootis-Bot]({{site.baseurl}}/assets/blog/2019-08-07/pootis-bot-status/pootis-bot.jpg)
+![Pootis-Bot](/assets/blog/2019/08/07/pootis-bot-status/pootis-bot.jpg)
 
 What I really want to do with Pootis-Bot is to have it released by the end of this year! Now I can't exactly tell when, as still I have no idea either, but still it is nearing completion.
 

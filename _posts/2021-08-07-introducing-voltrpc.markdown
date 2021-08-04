@@ -18,7 +18,7 @@ But why build another RPC library? Well for a few reasons, but the main ones inc
 
 One of the main issues that I had with many .NET RPC libraries is that many of them are slow. For what I am using them for the ideal speed would be few MS. But as we can see from the benchmarks, it's even faster than a few MS.
 
-![VoltRpc Pipes Benchmark](/assets/blog/2021-08-04/introducing-voltrpc/PipesBenchmark.png)
+![VoltRpc Pipes Benchmark](/assets/blog/2021/08/04/introducing-voltrpc/PipesBenchmark.png)
 
 ``` ini
 BenchmarkDotNet=v0.13.0, OS=Windows 10.0.19043.1110 (21H1/May2021Update)
