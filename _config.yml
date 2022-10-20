@@ -22,7 +22,7 @@ plugins:
 
 # Pagination settings
 paginate: 5
-paginate_path: "/blog/:num"
+paginate_path: "/blog/:num/"
 
 defaults:
   -
@@ -37,7 +37,7 @@ defaults:
 collections:
   posts:
     output: true
-    permalink: /blog/:year/:month/:day/:title
+    permalink: /blog/:year/:month/:day/:title/
     author: "Voltstro"
 
 # Exclude from processing.
