@@ -1,0 +1,29 @@
+@page "/{page}/"
+@using VoltWeb.Data
+@inject PageService PageService;
+
+@if (pageData == null)
+{
+    <PageTitle>Page Not Found</PageTitle>
+    <h1>Page does not exist!</h1>
+}
+else
+{
+    <PageTitle>@pageData.Value.Name</PageTitle>
+    
+    @pageData.Value.HtmlContent
+}
+
+
+@code {
+    [Parameter]
+    public string Page { get; set; }
+
+    private PageData? pageData;
+
+    protected override void OnParametersSet()
+    {
+        pageData = PageService.GetPage(Page);
+    }
+
+}

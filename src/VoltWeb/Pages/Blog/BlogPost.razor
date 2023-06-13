@@ -1,0 +1,63 @@
+@page "/blog/{year:int}/{month:int}/{day:int}/{id}/"
+@using VoltWeb.Data
+@using Microsoft.EntityFrameworkCore
+@inject BlogService BlogService
+
+@if (blog == null)
+{
+    <h1>Blog not found!</h1>
+}
+else
+{
+    <PageTitle>@blog.Value.Title</PageTitle>
+
+    <div class="pt-5">
+        <div class="card hero shadow">
+            <img src="/assets/Banner1.jpg" alt="Background" class="card-img" />
+            <div class="card-img-overlay">
+                <h1 class="card-title">@blog.Value.HeroData.Title</h1>
+                <p class="card-text">@blog.Value.HeroData.Text</p>
+            </div>
+        </div>
+        
+        <div class="pt-3">
+            <h2>@blog.Value.Title</h2>
+            <ul class="metabar">
+                <li>
+                    <ToLocal DateTime="@blog.Value.PublishedDate" Format="yyyy-mm-dd"></ToLocal>
+                </li>
+                
+                <li>
+                    @blog.Value.ReadingTime minutes to read
+                </li>
+    
+            </ul>
+        </div>
+    
+        <div class="pt-2">
+            @blog.Value.HtmlContent
+        </div>
+    </div>
+}
+
+@code
+{
+    [Parameter]
+    public int Year { get; set; }
+    
+    [Parameter]
+    public int Month { get; set; }
+    
+    [Parameter]
+    public int Day { get; set; }
+    
+    [Parameter]
+    public string Id { get; set; }
+
+    private BlogData? blog;
+
+    protected override void OnParametersSet()
+    {
+        blog = BlogService.GetBlogPost(Year, Month, Day, Id);
+    }
+}

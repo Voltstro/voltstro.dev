@@ -1,0 +1,23 @@
+//Import Fonts
+@import "@fontsource/roboto/400";
+@import "@fontsource/roboto/900";
+
+//Override bootstrap variables
+$font-family-sans-serif: 'Roboto', sans-serif;
+
+$body-color-dark: white;
+$body-bg-dark: #1E1E1E;
+$body-secondary-bg-dark: #121212;
+
+//Override Navbar
+.navbar {
+    background-color: $body-secondary-bg-dark;
+}
+
+//Custom classes
+@import "./hero.scss";
+@import "./metabar.scss";
+@import "./blazor.scss";
+
+//Import bootstrap
+@import "bootstrap/scss/bootstrap.scss";
