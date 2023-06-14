@@ -1,6 +1,5 @@
 @page "/blog/{year:int}/{month:int}/{day:int}/{id}/"
 @using VoltWeb.Data
-@using Microsoft.EntityFrameworkCore
 @inject BlogService BlogService
 
 @if (blog == null)
@@ -30,6 +29,13 @@ else
                 <li>
                     @blog.Value.ReadingTime minutes to read
                 </li>
+                
+                <li>
+                    @foreach (BlogData.Author author in blog.Value.Authors)
+                    {
+                        <img width="32" class="rounded-circle" alt="@author.Name" title="@author.Name" src="data:image;base64,@author.ImageBytes" />
+                    }
+                </li>
     
             </ul>
         </div>
@@ -56,8 +62,8 @@ else
 
     private BlogData? blog;
 
-    protected override void OnParametersSet()
+    protected override async Task OnParametersSetAsync()
     {
-        blog = BlogService.GetBlogPost(Year, Month, Day, Id);
+        blog = await BlogService.GetBlogPost(Year, Month, Day, Id);
     }
 }

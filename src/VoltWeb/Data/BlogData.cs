@@ -13,4 +13,13 @@ public struct BlogData
     public HeroData HeroData { get; init; }
     
     public MarkupString HtmlContent { get; set; }
+
+    public Author[] Authors { get; init; }
+    
+    public struct Author
+    {
+        public string Name { get; set; }
+        
+        public string ImageBytes { get; set; }
+    }
 }

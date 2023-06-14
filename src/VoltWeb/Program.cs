@@ -1,15 +1,8 @@
 using BlazorBootstrap;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Azure;
-using Graph = Microsoft.Graph;
 using VoltWeb.Data;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +13,7 @@ var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
 //Setup Azure AD Auth
 builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
-    .EnableTokenAcquisitionToCallDownstreamApi()
+    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
         .AddMicrosoftGraph(builder.Configuration.GetSection("DownstreamApi"))
     .AddInMemoryTokenCaches();
 
@@ -40,9 +33,9 @@ builder.Services.AddDbContext<VoltWebContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 //Add our services
-builder.Services.AddHttpClient();
-builder.Services.AddSingleton<PageService>();
-builder.Services.AddSingleton<BlogService>();
+//builder.Services.AddHttpClient();
+builder.Services.AddScoped<PageService>();
+builder.Services.AddScoped<BlogService>();
 
 //Add pages
 builder.Services.AddBlazorBootstrap();
