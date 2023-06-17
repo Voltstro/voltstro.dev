@@ -1,0 +1,23 @@
+.content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(12em, 20%);
+    grid-template-rows: auto auto;
+    grid-template-areas: "div aside";
+}
+
+.table-of-content {
+    padding: 0 !important;
+
+    .nav {
+        padding-left: 0.8em;
+
+        .nav-item {
+            padding-top: 0.2rem;
+            padding-bottom: 0.2rem;
+        }
+
+        .nav-link {
+            padding: 0;
+        }
+    }
+}

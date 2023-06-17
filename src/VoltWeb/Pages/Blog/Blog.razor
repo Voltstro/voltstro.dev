@@ -1,4 +1,6 @@
 @page "/blog/"
+@using VoltWeb.Data
+@inject BlogService BlogService;
 
 <PageTitle>Blog</PageTitle>
 
@@ -13,3 +15,18 @@
 <h2 class="pt-3">Posts</h2>
 <p>Something something</p>
 
+@foreach ( VoltWeb.Models.Blog blog in blogs)
+{
+    <a href="@($"/blog/{blog.PostDate.Year}/{blog.PostDate.Month}/{blog.PostDate.Day}/{blog.Id}/")">@blog.Title</a>
+}
+
+@code {
+
+    private VoltWeb.Models.Blog[] blogs;
+    
+    protected override void OnInitialized()
+    {
+        blogs = BlogService.GetBlogPosts();
+    }
+
+}

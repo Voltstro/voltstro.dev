@@ -9,6 +9,22 @@ $body-color-dark: white;
 $body-bg-dark: #1E1E1E;
 $body-secondary-bg-dark: #121212;
 
+$grid-breakpoints: (
+    xs: 0,
+    sm: 580px,
+    md: 760px,
+    lg: 1100px,
+    xl: 1400px,
+    xxl: 1900px
+) !default;
+$container-max-widths: (
+    sm: 580px,
+    md: 760px,
+    lg: 1150px,
+    xl: 1400px,
+    xxl: 1800px
+) !default;
+
 //Override Navbar
 .navbar {
     background-color: $body-secondary-bg-dark;
@@ -17,7 +33,16 @@ $body-secondary-bg-dark: #121212;
 //Custom classes
 @import "./hero.scss";
 @import "./metabar.scss";
+@import "./content.scss";
 @import "./blazor.scss";
 
 //Import bootstrap
 @import "bootstrap/scss/bootstrap.scss";
+
+//Body
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }

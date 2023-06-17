@@ -12,14 +12,18 @@ public struct BlogData
 
     public HeroData HeroData { get; init; }
     
-    public MarkupString HtmlContent { get; set; }
+    public MarkupString HtmlContent { get; init; }
+    
+    public bool ContainsCodeBlocks { get; init; }
+    
+    public string[] Headings { get; init; }
 
     public Author[] Authors { get; init; }
     
     public struct Author
     {
-        public string Name { get; set; }
+        public string Name { get; init; }
         
-        public string ImageBytes { get; set; }
+        public string ImageBytes { get; init; }
     }
 }

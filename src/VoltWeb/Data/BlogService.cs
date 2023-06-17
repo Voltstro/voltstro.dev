@@ -18,6 +18,7 @@ public partial class BlogService
     private readonly VoltWebContext dbContext;
     private readonly GraphServiceClient graphServiceClient;
     private readonly IMemoryCache memoryCache;
+    private readonly MarkdownService markdownService;
 
     [GeneratedRegex(@"\b\w+\b")]
     private static partial Regex WordCount();
@@ -33,12 +34,20 @@ public partial class BlogService
         ILogger<BlogService> logger,
         VoltWebContext dbContext,
         GraphServiceClient graphServiceClient,
-        IMemoryCache memoryCache)
+        IMemoryCache memoryCache,
+        MarkdownService markdownService)
     {
         this.logger = logger;
         this.dbContext = dbContext;
         this.graphServiceClient = graphServiceClient;
         this.memoryCache = memoryCache;
+        this.markdownService = markdownService;
+    }
+
+    public Blog[] GetBlogPosts()
+    {
+        Blog[] allPosts = dbContext.Blog.ToArray();
+        return allPosts;
     }
 
     /// <summary>
@@ -88,13 +97,19 @@ public partial class BlogService
 
             //Word count
             int wordCount = WordCount().Count(foundPage.Content);
+            
+            //Parse markdown
+            MarkdownResult markdownResult = markdownService.Parse(foundPage.Content);
+            
             return new BlogData
             {
                 Title = foundPage.Title,
                 ReadingTime = wordCount < 400 ? 2 : wordCount / 200,
                 PublishedDate = foundPage.PostDate,
-                HtmlContent = (MarkupString)Markdig.Markdown.ToHtml(foundPage.Content),
+                HtmlContent = (MarkupString)markdownResult.HtmlContent,
+                ContainsCodeBlocks = markdownResult.ContainsCodeBlocks,
                 Authors = blogAuthors.ToArray(),
+                Headings = markdownResult.Headings,
                 HeroData = new HeroData
                 {
                     Title = foundPage.Hero.Title,

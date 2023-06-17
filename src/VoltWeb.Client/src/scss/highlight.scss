@@ -1,0 +1,12 @@
+$border-radius: .375rem !default;
+
+code, pre {
+  border-radius: $border-radius
+}
+
+.hljs {
+  background-color: var(--bs-card-cap-bg);
+}
+
+
+@import "highlight.js/scss/github-dark.scss";

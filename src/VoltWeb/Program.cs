@@ -34,6 +34,7 @@ builder.Services.AddDbContext<VoltWebContext>(options =>
 
 //Add our services
 //builder.Services.AddHttpClient();
+builder.Services.AddSingleton<MarkdownService>();
 builder.Services.AddScoped<PageService>();
 builder.Services.AddScoped<BlogService>();
 

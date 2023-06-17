@@ -27,7 +27,7 @@ public class PageService
         return new PageData
         {
             Name = foundPage.Title,
-            HtmlContent = (MarkupString)Markdown.ToHtml(foundPage.Content)
+            //HtmlContent = (MarkupString)Markdown.ToHtml(foundPage.Content)
         };
     }
 }
