@@ -2,15 +2,27 @@
 @using VoltWeb.Data
 @inject BlogService BlogService
 
+    <PageTitle>@pageTitle</PageTitle>
+    
+
+<!-- Loading Screen --->
+@if (loading)
+{
+    <div class="pt-5 d-flex justify-content-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    return;
+}
+
 @if (blog == null)
 {
     <h1>Blog not found!</h1>
 }
 else
 {
-    <PageTitle>@blog.Value.Title</PageTitle>
-    
-    <div class="pt-2 container">
+    <div class="pt-4 container">
         <div class="card hero shadow">
             <img src="/assets/Banner1.jpg" alt="Background" class="card-img"/>
             <div class="card-img-overlay">
@@ -35,7 +47,7 @@ else
                         </li>
                             
                         <li>
-                            @foreach (BlogData.Author author in blog.Value.Authors)
+                            @foreach (BlogPostData.Author author in blog.Value.Authors)
                             {
                                 <img width="32" class="rounded-circle" alt="@author.Name" title="@author.Name" src="data:image;base64,@author.ImageBytes" />
                             }
@@ -82,16 +94,26 @@ else
     public int Day { get; set; }
     
     [Parameter]
-    public string Id { get; set; }
+    public string Id { get; set; } = null!;
 
-    private BlogData? blog;
+    private BlogPostData? blog;
+    private string pageTitle;
+    private bool loading;
     
     [Inject]
-    protected IJSRuntime JsInterop { get; set; }
+    protected IJSRuntime JsInterop { get; set; } = null!;
 
     protected override async Task OnParametersSetAsync()
     {
+        //Load, and get blog post
+        loading = true;
+        pageTitle = "Loading";
+        
         blog = await BlogService.GetBlogPost(Year, Month, Day, Id);
+        loading = false;
+
+        //Set page title
+        pageTitle = blog == null ? "Not Found!" : blog.Value.Title;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -99,6 +121,7 @@ else
         if(!firstRender)
             return;
         
+        //Highlight code blocks
         if(blog is {ContainsCodeBlocks: true })
             await JsInterop.InvokeVoidAsync("blazorHelpers.highlightCode");
     }

@@ -1,32 +1,103 @@
 @page "/blog/"
+@page "/blog/{id:int}"
 @using VoltWeb.Data
+@using VoltWeb.Collections
 @inject BlogService BlogService;
 
 <PageTitle>Blog</PageTitle>
 
-<div class="card hero">
-    <img src="/assets/Banner1.jpg" alt="Background" class="card-img" />
-    <div class="card-img-overlay">
-        <h1 class="card-title">Blog</h1>
-        <p class="card-text">The Voltstro blog. I write stuff whenever I feel like it.</p>
+<div class="pt-4 container">
+    <div class="card hero">
+        <img src="/assets/Banner1.jpg" alt="Background" class="card-img" />
+        <div class="card-img-overlay">
+            <h1 class="card-title">Blog</h1>
+            <p class="card-text">The Voltstro blog. I write stuff whenever I feel like it.</p>
+        </div>
     </div>
 </div>
 
-<h2 class="pt-3">Posts</h2>
-<p>Something something</p>
+<div class="pt-3 container">
+    <h2 class="pt-3">Posts</h2>
+    
+    @if (blogPosts == null)
+    {
+        <div class="pt-5 d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row gap-4">
+            @foreach (VoltWeb.Models.BlogPost blog in blogPosts)
+            {
+                string link = $"/blog/{blog.PublishedDate!.Value.Year}/{blog.PublishedDate.Value.Month}/{blog.PublishedDate.Value.Day}/{blog.PostShortId}/";
+            
+                <div class="col-12">
+                    <div class="card">
+                        <h5 class="card-header"><a class="text-decoration-none text-white" href="@link">@blog.Title</a></h5>
+                        <div class="card-body">
+                            <p class="card-text">Something something cool quick preview...</p>
+                            <div>
+                                <a class="btn btn-secondary btn-sm" href="@link">Read</a>
+                                            
+                                <span class="text-body-secondary align-bottom">
+                                    Published: <ToLocal DateTime="@blog.PublishedDate.Value" Format="yyyy-mm-dd"></ToLocal>
+                                </span>
+                            </div>
+                        </div>
 
-@foreach ( VoltWeb.Models.Blog blog in blogs)
-{
-    <a href="@($"/blog/{blog.PostDate.Year}/{blog.PostDate.Month}/{blog.PostDate.Day}/{blog.Id}/")">@blog.Title</a>
-}
+                    </div>
+                </div>
+            }
+        </div>
+        
+        <nav class="pt-4">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a 
+                        class="page-link @(!blogPosts.HasPreviousPage ? "disabled" : "")"
+                        href="/blog/@(Id - 1)"
+                        aria-label="Previous"
+                    >
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                
+                @for (int i = 1; i <= blogPosts.TotalPages; i++)
+                {
+                    <li class="page-item @(i == Id ? "active" : "")">
+                        <a class="page-link" href="/blog/@i">@i</a>
+                    </li>
+                }
+
+                <li class="page-item">
+                    <a 
+                        class="page-link @(!blogPosts.HasNextPage ? "disabled" : "")"
+                        href="/blog/@(Id + 1)"
+                        aria-label="Next"
+                    >
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+    }
+</div>
 
 @code {
-
-    private VoltWeb.Models.Blog[] blogs;
     
-    protected override void OnInitialized()
+    [Parameter]
+    public int Id { get; set; } = 1;
+
+    private PaginatedList<VoltWeb.Models.BlogPost>? blogPosts;
+
+    protected override async Task OnParametersSetAsync()
     {
-        blogs = BlogService.GetBlogPosts();
+        blogPosts = await BlogService.GetBlogPosts(Id);
+        StateHasChanged();
     }
 
 }

@@ -1,29 +1,13 @@
-using Microsoft.AspNetCore.Components;
-
 namespace VoltWeb.Data;
 
+/// <summary>
+///     Basic data on a blog
+/// </summary>
 public struct BlogData
 {
-    public string Title { get; init; }
+    public string Title { get; set; }
     
-    public int ReadingTime { get; init; }
+    public string Id { get; set; }
     
-    public DateTime PublishedDate { get; init; }
-
-    public HeroData HeroData { get; init; }
-    
-    public MarkupString HtmlContent { get; init; }
-    
-    public bool ContainsCodeBlocks { get; init; }
-    
-    public string[] Headings { get; init; }
-
-    public Author[] Authors { get; init; }
-    
-    public struct Author
-    {
-        public string Name { get; init; }
-        
-        public string ImageBytes { get; init; }
-    }
+    public DateTime PublishedDate { get; set; }
 }

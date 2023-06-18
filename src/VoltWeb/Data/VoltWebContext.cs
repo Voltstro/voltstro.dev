@@ -13,7 +13,7 @@ public class VoltWebContext : DbContext
 
     public DbSet<Page> Page { get; set; }
     
-    public DbSet<Blog> Blog { get; set; }
+    public DbSet<BlogPost> Blog { get; set; }
     
     public DbSet<BlogAuthor> BlogAuthors { get; set; }
 }

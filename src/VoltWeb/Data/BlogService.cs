@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Graph;
 using Microsoft.Identity.Web;
+using VoltWeb.Collections;
 using VoltWeb.Models;
 
 namespace VoltWeb.Data;
@@ -44,10 +45,10 @@ public partial class BlogService
         this.markdownService = markdownService;
     }
 
-    public Blog[] GetBlogPosts()
+    public async Task<PaginatedList<BlogPost>> GetBlogPosts(int lastId)
     {
-        Blog[] allPosts = dbContext.Blog.ToArray();
-        return allPosts;
+        IQueryable<BlogPost> postsIq = dbContext.Blog.Where(x => x.PublishedDate != null);
+        return await PaginatedList<BlogPost>.CreateAsync(postsIq, lastId, 5);
     }
 
     /// <summary>
@@ -58,27 +59,30 @@ public partial class BlogService
     /// <param name="day"></param>
     /// <param name="id"></param>
     /// <returns></returns>
-    public async Task<BlogData?> GetBlogPost(int year, int month, int day, string id)
+    public async Task<BlogPostData?> GetBlogPost(int year, int month, int day, string id)
     {
         string blogCacheId = $"BlogPost-{year}-{month}-{day}-{id}";
-        BlogData? blogData = await memoryCache.GetOrCreateAsync<BlogData?>(blogCacheId, async entry =>
+        BlogPostData? blogData = await memoryCache.GetOrCreateAsync<BlogPostData?>(blogCacheId, async entry =>
         {
             entry.AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(6);
             
-            Blog? foundPage = dbContext.Blog
+            BlogPost? foundPage = dbContext.Blog
                 .Include(x => x.Hero)
-                .FirstOrDefault(x => x.Id == id && x.PostDate.Year == year && x.PostDate.Month == month && x.PostDate.Day == day);
+                .Where(x => 
+                    x.PostShortId == id)
+                .Take(1)
+                .FirstOrDefault();
             if (foundPage == null)
                 return null;
             
             //Get authors
             BlogAuthor[] authors = dbContext.BlogAuthors.Where(x => x.BlogId == foundPage.Id).ToArray();
-            List<BlogData.Author> blogAuthors = new();
+            List<BlogPostData.Author> blogAuthors = new();
             foreach (BlogAuthor blogAuthor in authors)
             {
                 try
                 {
-                    BlogData.Author? user = await GetAzureUser(blogAuthor.AzureId);
+                    BlogPostData.Author? user = await GetAzureUser(blogAuthor.AzureId);
 
                     if (user == null)
                     {
@@ -101,11 +105,11 @@ public partial class BlogService
             //Parse markdown
             MarkdownResult markdownResult = markdownService.Parse(foundPage.Content);
             
-            return new BlogData
+            return new BlogPostData
             {
                 Title = foundPage.Title,
                 ReadingTime = wordCount < 400 ? 2 : wordCount / 200,
-                PublishedDate = foundPage.PostDate,
+                PublishedDate = foundPage.PublishedDate!.Value,
                 HtmlContent = (MarkupString)markdownResult.HtmlContent,
                 ContainsCodeBlocks = markdownResult.ContainsCodeBlocks,
                 Authors = blogAuthors.ToArray(),
@@ -121,11 +125,11 @@ public partial class BlogService
         return blogData;
     }
 
-    private async Task<BlogData.Author?> GetAzureUser(string azureId)
+    private async Task<BlogPostData.Author?> GetAzureUser(string azureId)
     {
-        BlogData.Author? user = await memoryCache.GetOrCreateAsync($"AzureAd-{azureId}", async entry =>
+        BlogPostData.Author? user = await memoryCache.GetOrCreateAsync($"AzureAd-{azureId}", async entry =>
         {
-            BlogData.Author? author = null;
+            BlogPostData.Author? author = null;
             IUserRequestBuilder userBuilder = graphServiceClient.Users[azureId];
             User? user = await userBuilder.Request().WithAppOnly().GetAsync();
             if (user != null)
@@ -141,7 +145,7 @@ public partial class BlogService
                 string photoBytes = await streamReader.ReadToEndAsync();
 
                 //Create author
-                author = new BlogData.Author
+                author = new BlogPostData.Author
                 {
                     Name = user.DisplayName,
                     ImageBytes = photoBytes

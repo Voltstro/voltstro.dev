@@ -12,6 +12,6 @@ public class BlogAuthor
     public string AzureId { get; set; }
     
     [ForeignKey("Blog")]
-    public string BlogId { get; set; }
-    public virtual Blog Blog { get; set; }
+    public int BlogId { get; set; }
+    public virtual BlogPost BlogPost { get; set; }
 }

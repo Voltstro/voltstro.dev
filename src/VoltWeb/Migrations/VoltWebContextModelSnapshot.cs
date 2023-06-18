@@ -17,36 +17,10 @@ namespace VoltWeb.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.5")
+                .HasAnnotation("ProductVersion", "7.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
-
-            modelBuilder.Entity("VoltWeb.Models.Blog", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("HeroId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("PostDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HeroId");
-
-                    b.ToTable("Blog");
-                });
 
             modelBuilder.Entity("VoltWeb.Models.BlogAuthor", b =>
                 {
@@ -60,15 +34,56 @@ namespace VoltWeb.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("BlogId")
+                    b.Property<int>("BlogId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("BlogPostId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BlogPostId");
+
+                    b.ToTable("BlogAuthors");
+                });
+
+            modelBuilder.Entity("VoltWeb.Models.BlogPost", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("EditedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("HeroId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PostShortId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("PublishedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BlogId");
+                    b.HasIndex("HeroId");
 
-                    b.ToTable("BlogAuthors");
+                    b.HasIndex("PostShortId")
+                        .IsUnique();
+
+                    b.ToTable("Blog");
                 });
 
             modelBuilder.Entity("VoltWeb.Models.Hero", b =>
@@ -115,7 +130,18 @@ namespace VoltWeb.Migrations
                     b.ToTable("Page");
                 });
 
-            modelBuilder.Entity("VoltWeb.Models.Blog", b =>
+            modelBuilder.Entity("VoltWeb.Models.BlogAuthor", b =>
+                {
+                    b.HasOne("VoltWeb.Models.BlogPost", "BlogPost")
+                        .WithMany()
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("BlogPost");
+                });
+
+            modelBuilder.Entity("VoltWeb.Models.BlogPost", b =>
                 {
                     b.HasOne("VoltWeb.Models.Hero", "Hero")
                         .WithMany()
@@ -124,17 +150,6 @@ namespace VoltWeb.Migrations
                         .IsRequired();
 
                     b.Navigation("Hero");
-                });
-
-            modelBuilder.Entity("VoltWeb.Models.BlogAuthor", b =>
-                {
-                    b.HasOne("VoltWeb.Models.Blog", "Blog")
-                        .WithMany()
-                        .HasForeignKey("BlogId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Blog");
                 });
 
             modelBuilder.Entity("VoltWeb.Models.Page", b =>

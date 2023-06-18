@@ -30,8 +30,11 @@ namespace VoltWeb.Migrations
                 name: "Blog",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
-                    PostDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    PostShortId = table.Column<string>(type: "text", nullable: false),
+                    PublishedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    EditedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     Title = table.Column<string>(type: "text", nullable: false),
                     HeroId = table.Column<int>(type: "integer", nullable: false),
                     Content = table.Column<string>(type: "text", nullable: false)
@@ -74,14 +77,15 @@ namespace VoltWeb.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     AzureId = table.Column<string>(type: "text", nullable: false),
-                    BlogId = table.Column<string>(type: "text", nullable: false)
+                    BlogId = table.Column<int>(type: "integer", nullable: false),
+                    BlogPostId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_BlogAuthors", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_BlogAuthors_Blog_BlogId",
-                        column: x => x.BlogId,
+                        name: "FK_BlogAuthors_Blog_BlogPostId",
+                        column: x => x.BlogPostId,
                         principalTable: "Blog",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -93,9 +97,15 @@ namespace VoltWeb.Migrations
                 column: "HeroId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BlogAuthors_BlogId",
+                name: "IX_Blog_PostShortId",
+                table: "Blog",
+                column: "PostShortId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BlogAuthors_BlogPostId",
                 table: "BlogAuthors",
-                column: "BlogId");
+                column: "BlogPostId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Page_HeroId",
