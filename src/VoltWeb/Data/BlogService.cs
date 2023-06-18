@@ -23,7 +23,7 @@ public partial class BlogService
 
     [GeneratedRegex(@"\b\w+\b")]
     private static partial Regex WordCount();
-    
+
     /// <summary>
     ///     Creates a new <see cref="BlogService"/> instance
     /// </summary>
@@ -31,6 +31,7 @@ public partial class BlogService
     /// <param name="dbContext"></param>
     /// <param name="graphServiceClient"></param>
     /// <param name="memoryCache"></param>
+    /// <param name="markdownService"></param>
     public BlogService(
         ILogger<BlogService> logger,
         VoltWebContext dbContext,

@@ -90,13 +90,17 @@
 @code {
     
     [Parameter]
-    public int Id { get; set; } = 1;
+    public int? Id { get; set; }
 
     private PaginatedList<VoltWeb.Models.BlogPost>? blogPosts;
 
     protected override async Task OnParametersSetAsync()
     {
-        blogPosts = await BlogService.GetBlogPosts(Id);
+        //Make sure ID is greater than 0
+        if(Id is < 0)
+            return;
+        
+        blogPosts = await BlogService.GetBlogPosts(Id ?? 1);
         StateHasChanged();
     }
 
