@@ -1,4 +1,6 @@
 ﻿@page "/"
+@using VoltWeb.Data
+@inject YouTubeApiService YouTubeApiService;
 
 <PageTitle>Home</PageTitle>
 
@@ -18,7 +20,29 @@
     
     <h2>YouTube</h2>
     <p>Here my latest YouTube video. I don't upload very often.</p>
-    
+    @if (loading)
+    {
+        <div class="pt-5 d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else if(!loading && !latestVideo.HasValue)
+    {
+        <p>Failed to load Video!</p>
+    }
+    else
+    {
+        <iframe
+            width="100%"
+            height="500"
+            frameborder="0"
+            src="https://www.youtube-nocookie.com/embed/@latestVideo!.Value.VideoId?controls=1&autoplay=0"
+        >
+        </iframe>
+    }
+
     <h2>Discord</h2>
     <p>My Discord server, kinda dead.</p>
     <iframe
@@ -31,3 +55,16 @@
     </iframe>
 </div>
     
+    @code {
+
+        private bool loading;
+        private YouTubeVideo? latestVideo;
+        
+        protected override async Task OnInitializedAsync()
+        {
+            loading = true;
+            latestVideo = await YouTubeApiService.GetChannelLatestVideo("UCGE1RiKvxmhB1mEVzJS0MtA");
+            loading = false;
+        }
+
+    }
