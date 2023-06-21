@@ -39,6 +39,8 @@ $container-max-widths: (
 //Import bootstrap
 @import "bootstrap/scss/bootstrap.scss";
 
+@import "./iframes.scss";
+
 //Body
 body {
     min-height: 100vh;
